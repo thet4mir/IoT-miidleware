@@ -1,0 +1,26 @@
+syntax = "proto3";
+package devices;
+option go_package="devicepb";
+
+message Device {
+    string id_vendor = 1;
+    string id_product = 2;
+    string serial = 3;
+    string action = 4;
+}
+
+message DeviceUpdateRequest {
+    Device device = 1;
+}
+
+message DeviceUpdateResponse {}
+
+message DeviceListRequest {}
+
+message DeviceListResponse {
+    repeated Device device = 1;
+}
+service DeviceService{
+    rpc DeviceUpdate(DeviceUpdateRequest) returns (DeviceUpdateResponse) {};
+    rpc DeviceList(DeviceListRequest) returns (stream DeviceListResponse) {};
+}
